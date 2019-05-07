@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.sprphnx.aop.aspect.ConsentLogAspect;
 import com.sprphnx.aop.exception.AOPException;
 import com.sprphnx.aop.model.AuthenticationRequest;
+import com.sprphnx.aop.model.AuthenticationResponse;
 
 @Service
 public class AuthenticationService {
@@ -16,11 +17,12 @@ public class AuthenticationService {
 	
 	private static final Object OTP = "999999";
 
-	public void verifyOTP(AuthenticationRequest request) throws AOPException {
+	public AuthenticationResponse verifyOTP(AuthenticationRequest request) throws AOPException {
 		
 		if(!OTP.equals(request.getOtp())) {
 			throw new AOPException("101","OTP_MISMATCH","Incorrect OTP provided");
 		}
+		return new AuthenticationResponse("0", "Success");
 	}
 	
 	@Async

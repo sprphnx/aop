@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sprphnx.aop.exception.AOPException;
+import com.sprphnx.aop.model.AuthenticationResponse;
 import com.sprphnx.aop.service.AuthenticationService;
 
 @Aspect
@@ -26,8 +27,9 @@ public class ConsentLogAspect {
 	    log.info("======================================\nException from aspect\n======================================");
 	}
 
-	@AfterReturning(pointcut = "execution(* com.sprphnx.aop.service.AuthenticationService.*(com.sprphnx.aop.model.AuthenticationRequest))")
-	public void afterSuccessfulReturn(JoinPoint joinPoint) {
+	@AfterReturning(pointcut = "execution(* com.sprphnx.aop.service.AuthenticationService.*(com.sprphnx.aop.model.AuthenticationRequest))",returning="authenticationResponse")
+	public void afterSuccessfulReturn(JoinPoint joinPoint, AuthenticationResponse authenticationResponse) {
+		log.info("++++++++++++Testing Return Object reading++++++++++++{}:{}",authenticationResponse.getCode(),authenticationResponse.getMessage());
 		authenticationService.logMessage();
 	}
 
