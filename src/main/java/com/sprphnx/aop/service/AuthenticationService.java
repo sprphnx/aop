@@ -26,9 +26,9 @@ public class AuthenticationService {
 	}
 	
 	@Async
-	public void logMessage() {
+	public void logMessage(String message) {
 		log.info("======================================");
-		log.info("Sucecss from acpect thread.");
+		log.info(message);
 		log.info("======================================");
 	}
 }

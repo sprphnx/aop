@@ -26,6 +26,7 @@ public class AopApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		authenticationService.verifyOTP(new AuthenticationRequest("", "999999", "1223233", LocalDateTime.now()));
+		authenticationService.verifyOTP(new AuthenticationRequest("", "233223", "1223233", LocalDateTime.now()));
 	}
 
 }

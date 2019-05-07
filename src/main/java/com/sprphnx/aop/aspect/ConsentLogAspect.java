@@ -24,13 +24,12 @@ public class ConsentLogAspect {
 	
 	@AfterThrowing (pointcut = "execution(* com.sprphnx.aop.service.AuthenticationService.*(com.sprphnx.aop.model.AuthenticationRequest))", throwing = "ex")
 	public void afterThrowingException(JoinPoint joinPoint, AOPException ex) {
-	    log.info("======================================\nException from aspect\n======================================");
+	    authenticationService.logMessage("Exception from aspect");
 	}
 
 	@AfterReturning(pointcut = "execution(* com.sprphnx.aop.service.AuthenticationService.*(com.sprphnx.aop.model.AuthenticationRequest))",returning="authenticationResponse")
 	public void afterSuccessfulReturn(JoinPoint joinPoint, AuthenticationResponse authenticationResponse) {
-		log.info("++++++++++++Testing Return Object reading++++++++++++{}:{}",authenticationResponse.getCode(),authenticationResponse.getMessage());
-		authenticationService.logMessage();
+		authenticationService.logMessage(authenticationResponse.getMessage());
 	}
 
 }
